@@ -2,16 +2,16 @@ from ultralytics import YOLO
 import csv
 import os
 from collections import defaultdict
-#Modell geladen
-model = YOLO("yolov8n.pt")
+# Importieren des Modells
+model = YOLO("yolov8n.pt") # Für anderes Modell als Nano, bitte n durch s(Small), m(Medium), etc. ersetzen
 
 sources = [
-   r"C:\Users\caram\OneDrive\Desktop\Burgbach.MP4" # Bananae = Username, beim "-" muss der Name des Videos eingefügt werden.
-
+   r"C:\Users\Banane\Desktop\XXX.MP4" # Banane = Username, beim "XXX" muss der Name des Videos eingefügt werden z.B. Burgbach_Rain
+# Es können auch mehrere Videos aufeinmal klassifiziert werde, dafür einfach Zeile 9 erneut einfügen und Namen abändern
     ]
-# 3. Ordner für CSV-Ergebnisse erstellen
+# Ordner für CSV-Ergebnisse erstellen
 os.makedirs("csv_results", exist_ok=True)
-# 4. Alle Videos durchgehen
+# Alle Videos durchgehen
 for src in sources:
    video_name = os.path.basename(src).split(".")[0]   # Dateiname ohne Endung
    csv_path = f"csv_results/{video_name}_avg_results.csv"
@@ -33,4 +33,4 @@ for src in sources:
        for label, confs in class_scores.items():
            avg_conf = sum(confs) / len(confs)
            writer.writerow([label, f"{avg_conf:.2f}"])
-   print(f" Durchschnittswerte gespeichert: {csv_path}")
+   print(f" Durchschnittswerte gespeichert: {csv_path}") # Durchschnittswerte gespeichert, erscheindt wenn alles geklappt hat
